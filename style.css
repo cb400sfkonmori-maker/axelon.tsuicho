@@ -528,3 +528,73 @@ input:focus {
         clip: rect(23px, 9999px, 47px, 0);
     }
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .execute-btn {
+        font-size: 1.1rem;
+        padding: 1.2rem;
+    }
+
+    .calculation-breakdown li {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .calculation-breakdown li span {
+        text-align: right;
+    }
+
+    .amount-display {
+        font-size: 2.5rem;
+    }
+
+    .komori-advice {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .komori-avatar {
+        margin-bottom: 1rem;
+    }
+
+    .crime-breakdown {
+        padding: 1.2rem;
+        margin: 2rem 0;
+    }
+
+    .crime-title {
+        font-size: 1.1rem;
+    }
+
+    .crime-basis {
+        display: block;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .salvation-btn {
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+        display: block;
+    }
+}
