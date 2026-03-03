@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const incomeLevels = [300, 500, 700, 1000, 1200, 1500, 1800];
         const dataValues = incomeLevels.map(inc => {
             const taxRate = getIncomeTaxRate(inc * 10000) + 0.10;
-            return Math.floor(maxBenefit * taxRate) / 10000; // 万円単位
+            return Math.floor((maxBenefit * taxRate) / 10000); // 万円単位
         });
 
         const bgColors = incomeLevels.map((inc, i) => {
@@ -81,9 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.getElementById('close-popup-btn').addEventListener('click', () => {
-        document.getElementById('popup-overlay').classList.add('hidden');
-    });
+    // Popup logic removed
 
     function getIncomeTaxRate(incomeYen) {
         // 日本の所得税率（簡易概算・累進課税）
@@ -165,10 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
             animateValue(taxTotalEl, 0, additionalTax, 2500, () => {
                 taxTotalEl.setAttribute('data-text', additionalTax.toLocaleString());
                 taxTotalEl.classList.add('active');
-
-                setTimeout(() => {
-                    document.getElementById('popup-overlay').classList.remove('hidden');
-                }, 1500);
             });
 
             // ランダムなアドバイスを選択して表示
