@@ -18,6 +18,73 @@ document.addEventListener('DOMContentLoaded', () => {
         "「不当な二重価格」は、従業員の忠誠心を逆手に取った搾取の構造です。あなたは今、自分が組織の生け贄であることに気づきましたね。"
     ];
 
+    let impactChartInstance = null;
+    function renderImpactChart(maxBenefit) {
+        const ctx = document.getElementById('impact-chart').getContext('2d');
+        const incomeLevels = [300, 500, 700, 1000, 1200, 1500, 1800];
+        const dataValues = incomeLevels.map(inc => {
+            const taxRate = getIncomeTaxRate(inc * 10000) + 0.10;
+            return Math.floor(maxBenefit * taxRate) / 10000; // 万円単位
+        });
+
+        const bgColors = incomeLevels.map((inc, i) => {
+            const red = 100 + (155 * i / (incomeLevels.length - 1));
+            return `rgba(${red}, 0, 0, 0.8)`;
+        });
+
+        if (impactChartInstance) {
+            impactChartInstance.destroy();
+        }
+
+        Chart.defaults.color = "#f0f0f0";
+        impactChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: incomeLevels.map(i => `${i}万`),
+                datasets: [{
+                    label: '追加税額（万円）',
+                    data: dataValues,
+                    backgroundColor: bgColors,
+                    borderColor: 'rgba(255, 42, 42, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.parsed.y}万円`
+                        }
+                    },
+                    datalabels: {
+                        color: 'white',
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value) => value + '万',
+                        font: { weight: 'bold', size: 14 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    }
+
+    document.getElementById('close-popup-btn').addEventListener('click', () => {
+        document.getElementById('popup-overlay').classList.add('hidden');
+    });
+
     function getIncomeTaxRate(incomeYen) {
         // 日本の所得税率（簡易概算・累進課税）
         if (incomeYen <= 1950000) return 0.05;
@@ -79,6 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // 数字のアニメーション表示
         resultSection.classList.remove('hidden');
 
+        // チャートの描画（525万円の利益ベース）
+        renderImpactChart(5251000);
+
         // 少しディレイを入れてからアニメーション開始（DOMレンダリングのため）
         requestAnimationFrame(() => {
             resultSection.classList.add('fade-in');
@@ -88,8 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
 
+            // リセット
+            taxTotalEl.classList.remove('active');
+
             // 数字のカウントアップ演出
-            animateValue(taxTotalEl, 0, additionalTax, 2500);
+            animateValue(taxTotalEl, 0, additionalTax, 2500, () => {
+                taxTotalEl.setAttribute('data-text', additionalTax.toLocaleString());
+                taxTotalEl.classList.add('active');
+
+                setTimeout(() => {
+                    document.getElementById('popup-overlay').classList.remove('hidden');
+                }, 1500);
+            });
 
             // ランダムなアドバイスを選択して表示
             const randomAdvice = ADVICES[Math.floor(Math.random() * ADVICES.length)];
@@ -97,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function animateValue(obj, start, end, duration) {
+    function animateValue(obj, start, end, duration, callback) {
         let startTimestamp = null;
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
@@ -117,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 obj.style.transform = "scale(1.1)";
                 setTimeout(() => {
                     obj.style.transform = "scale(1)";
+                    if (callback) callback();
                 }, 200);
             }
         };

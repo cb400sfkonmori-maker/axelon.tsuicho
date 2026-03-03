@@ -9,6 +9,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 
 <body>
@@ -58,7 +60,7 @@
                 <div class="tax-amount">
                     <p>この押し付けられた見えない年収（増額分）に対して、あなたが自腹で支払うべき追加の税金（追徴課税額）は以下の通りです。</p>
                     <div class="amount-display">
-                        <span id="tax-total">0</span><span>円</span>
+                        <span id="tax-total" class="glitch-number" data-text="0">0</span><span>円</span>
                     </div>
                     <p class="warning-text">この金額、会社の看板で商売している間に、あなたの貯金から消えてなくなりますよ？</p>
                 </div>
@@ -71,28 +73,47 @@
                     </div>
                 </div>
 
+                <div class="chart-section">
+                    <h3>【年収別・追加課税インパクト】</h3>
+                    <p class="subtitle">※持株枠最大（1,000株）購入し、525万円の「みなし給与」を押し付けられた場合の追加税額</p>
+                    <div class="chart-wrapper">
+                        <canvas id="impact-chart"></canvas>
+                    </div>
+                </div>
+
                 <div class="crime-breakdown">
-                    <h3>【会社が犯した罪状とリスクの実態】</h3>
+                    <h3>【経営陣の診断書】</h3>
+                    <p class="crime-subtitle">※第65期 第1回臨時株主総会議事録に基づく事実</p>
                     <div class="crime-item">
                         <div class="crime-title">善管注意義務違反</div>
-                        <div class="crime-desc">特定の株主（由井氏）にのみ時価（5,751円）で利益を供与し、会社に3.4億円の損害を与えた罪。</div>
-                        <div class="crime-basis">根拠：345,060,000円の特定株主からの自己株式取得</div>
+                        <div class="crime-desc">特定の株主にのみ3.4億円の利益を供与した疑い</div>
                     </div>
                     <div class="crime-item">
-                        <div class="crime-title">利益相反取引の疑い</div>
-                        <div class="crime-desc">監査役という立場を利用し、一般従業員（500円）とは比較にならない高値で売り抜けた不公平な取引。</div>
-                        <div class="crime-basis">根拠：買付単価5,751円 vs 従業員譲渡単価500円</div>
+                        <div class="crime-title">利益相反取引</div>
+                        <div class="crime-desc">監査役という立場を利用した不透明な自己株式取得</div>
                     </div>
                     <div class="crime-item">
-                        <div class="crime-title">株主代表訴訟リスク</div>
-                        <div class="crime-desc">会社に損害を与えたとして、他の株主から取締役個人に対して損害賠償を請求される可能性。</div>
-                        <div class="crime-basis">根拠：会社資産の著しい流出（3.4億円）</div>
+                        <div class="crime-title">会社資産の著しい流出</div>
+                        <div class="crime-desc">流出額：345,060,000円</div>
                     </div>
-                    <div class="crime-item">
-                        <div class="crime-title">税務当局の強制捜査</div>
-                        <div class="crime-desc">従業員への「みなし給与」を隠蔽したとして、会社側にも重加算税や社会的信用の失墜が及ぶ。</div>
-                        <div class="crime-basis">根拠：1株あたり5,251円の経済的利益の発生</div>
+                </div>
+
+                <div class="mvv-section">
+                    <div class="mvv-content">
+                        <h3>AxelOn Mission</h3>
+                        <p>「未来を動かすハンドルと、どこへでも行ける地図を。」</p>
+
+                        <h3>AxelOn Vision</h3>
+                        <p>「『ここで育ってよかった』と、20年後に帰ってきたくなる街。」</p>
+
+                        <h3>AxelOn Value</h3>
+                        <ul>
+                            <li>自分で考え、自分で決める。</li>
+                            <li>「なぜ？」を面白がる。</li>
+                            <li>違いを「混ぜる」と強くなる。</li>
+                        </ul>
                     </div>
+                    <p class="ending-message">「会社は君を裏切るが、知能は君を裏切らない。自分の足で立てｗ」</p>
                 </div>
 
                 <div class="salvation">
@@ -101,6 +122,15 @@
             </section>
         </main>
     </div>
+    </div>
+
+    <div id="popup-overlay" class="popup-overlay hidden">
+        <div class="popup-content glitch-box">
+            <p>お世話しましたｗ</p>
+            <button id="close-popup-btn" class="salvation-btn">自分の足で立つ</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
