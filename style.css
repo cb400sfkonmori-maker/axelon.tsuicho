@@ -1,0 +1,530 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #f0f0f0;
+    --accent-red: #ff2a2a;
+    --dark-red: #4a0000;
+    --glass-bg: rgba(10, 10, 15, 0.75);
+    --glass-border: rgba(255, 42, 42, 0.25);
+    --font-heading: 'Noto Serif JP', serif;
+    --font-body: 'Zen Kaku Gothic New', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--accent-red);
+    text-shadow: 0 0 15px rgba(255, 42, 42, 0.5);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #cccccc;
+    letter-spacing: 2px;
+}
+
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a subtle red gradient at the top of cards */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+    opacity: 0.6;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.8rem;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    color: #ffffff;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+input {
+    width: 100%;
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--glass-border);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(255, 42, 42, 0.4);
+    background: rgba(20, 0, 0, 0.4);
+}
+
+.execute-btn {
+    width: 100%;
+    padding: 1.4rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #111, var(--dark-red), var(--accent-red));
+    background-size: 200% 200%;
+    border: 1px solid rgba(255, 42, 42, 0.5);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-family: var(--font-heading);
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.execute-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 100, 100, 0.3) 0%, transparent 60%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.6s, opacity 0.6s;
+}
+
+.execute-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 42, 42, 0.7);
+    animation: gradientPulse 3s ease infinite;
+}
+
+.execute-btn:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.execute-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(255, 42, 42, 0.4);
+}
+
+@keyframes gradientPulse {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    display: block;
+    animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.congratulations {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffcccc;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    border: 1px dashed var(--accent-red);
+    background: rgba(255, 42, 42, 0.15);
+    border-radius: 8px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 42, 42, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 42, 42, 0);
+    }
+}
+
+.calculation-breakdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calculation-breakdown li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+
+.calculation-breakdown li:last-child {
+    border-bottom: none;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+.highlight.red {
+    color: var(--accent-red);
+    text-shadow: 0 0 8px rgba(255, 42, 42, 0.5);
+    font-size: 1.2rem;
+}
+
+.tax-amount {
+    text-align: center;
+    margin: 3.5rem 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.amount-display {
+    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    color: var(--accent-red);
+    text-shadow: 0 0 20px rgba(255, 42, 42, 0.7);
+    margin: 1.5rem 0;
+    line-height: 1;
+}
+
+.warning-text {
+    font-size: 1rem;
+    color: #aa8888;
+}
+
+.komori-advice {
+    background: rgba(10, 0, 0, 0.7);
+    border-left: 5px solid var(--accent-red);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    border-radius: 4px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.komori-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid var(--accent-red);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.komori-avatar::before {
+    content: "執刀医";
+    color: var(--accent-red);
+}
+
+/* Add a scanline effect to avatar */
+.komori-avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 0, 0, 0.2), transparent);
+    animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.advice-content h4 {
+    margin: 0 0 0.8rem 0;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+}
+
+.advice-content p {
+    margin: 0;
+    font-style: italic;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.crime-breakdown {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(20, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+}
+
+.crime-breakdown h3 {
+    color: var(--accent-red);
+    font-family: var(--font-heading);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--accent-red);
+    padding-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 42, 42, 0.4);
+}
+
+.crime-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.crime-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.crime-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffcccc;
+    margin-bottom: 0.4rem;
+}
+
+.crime-desc {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+}
+
+.crime-basis {
+    font-size: 0.95rem;
+    color: #aa8888;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-left: 3px solid #666;
+    display: inline-block;
+}
+
+.salvation {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.salvation-btn {
+    display: inline-block;
+    padding: 1.2rem 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.salvation-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Glitch Effect for Title */
+.glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 rgba(255, 0, 0, 0.8);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 rgba(0, 0, 255, 0.8);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(10px, 9999px, 86px, 0);
+    }
+
+    5% {
+        clip: rect(54px, 9999px, 15px, 0);
+    }
+
+    10% {
+        clip: rect(87px, 9999px, 88px, 0);
+    }
+
+    15% {
+        clip: rect(31px, 9999px, 83px, 0);
+    }
+
+    20% {
+        clip: rect(6px, 9999px, 12px, 0);
+    }
+
+    25% {
+        clip: rect(96px, 9999px, 49px, 0);
+    }
+
+    100% {
+        clip: rect(96px, 9999px, 49px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(65px, 9999px, 100px, 0);
+    }
+
+    5% {
+        clip: rect(9px, 9999px, 73px, 0);
+    }
+
+    10% {
+        clip: rect(15px, 9999px, 42px, 0);
+    }
+
+    15% {
+        clip: rect(32px, 9999px, 80px, 0);
+    }
+
+    20% {
+        clip: rect(3px, 9999px, 8px, 0);
+    }
+
+    25% {
+        clip: rect(23px, 9999px, 47px, 0);
+    }
+
+    100% {
+        clip: rect(23px, 9999px, 47px, 0);
+    }
+}

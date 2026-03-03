@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>あなたの人生を削る「毒饅頭」の値段</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <span class="glitch" data-text="組織の腐敗による、">組織の腐敗による、</span><br>
+                <span class="glitch" data-text="あなたの被害額">あなたの被害額</span>
+            </h1>
+            <p class="subtitle">ヨシモトポール 臨時株主総会 決議事項から算定</p>
+        </header>
+
+        <main>
+            <section class="card glassmorphism input-section">
+                <h2>あなたの状態（メスを入れる箇所）</h2>
+
+                <div class="input-group">
+                    <label for="income">現在の年収（万円）</label>
+                    <input type="number" id="income" placeholder="例: 500" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="investment">持株購入総額（万円）<br><small
+                            class="warning-text">※役員以外の従業員枠：1万円～50万円</small></label>
+                    <input type="number" id="investment" placeholder="例: 50" min="0" max="50">
+                </div>
+
+                <button id="calculate-btn" class="execute-btn">不都合な真実を直視する</button>
+            </section>
+
+            <section id="result-section" class="card glassmorphism result-section hidden">
+                <div class="congratulations">
+                    <p>おめでとうございます。<br>あなたは会社から『毒饅頭』をプレゼントされましたｗ</p>
+                </div>
+
+                <div class="calculation-breakdown" id="detailed-breakdown">
+                    <h3>【外科的解剖結果】</h3>
+                    <ul>
+                        <li>会社が特定株主から買い取った価格：<span class="highlight">5,751円/株</span></li>
+                        <li>あなたが会社から買わされた価格　：<span>500円/株</span></li>
+                        <li>1株あたりの「経済的利益（みなし給与）」：<span class="highlight red">5,251円</span></li>
+                        <li>あなたが掴まされた株数：<span id="shares-count">0</span>株</li>
+                        <li>新たに発覚した隠し「課税対象年収（増額分）」：<span id="recognized-profit" class="highlight red">0</span>円</li>
+                    </ul>
+                </div>
+
+                <div class="tax-amount">
+                    <p>この押し付けられた見えない年収（増額分）に対して、あなたが自腹で支払うべき追加の税金（追徴課税額）は以下の通りです。</p>
+                    <div class="amount-display">
+                        <span id="tax-total">0</span><span>円</span>
+                    </div>
+                    <p class="warning-text">この金額、会社の看板で商売している間に、あなたの貯金から消えてなくなりますよ？</p>
+                </div>
+
+                <div class="komori-advice">
+                    <div class="komori-avatar"></div>
+                    <div class="advice-content">
+                        <h4>小森社長（執刀医）からの外科的アドバイス</h4>
+                        <p id="advice-text">組織の膿は、放っておけば全身に回る。真面目に働く者が割を食い、一部の者が甘い汁を吸う体制に、あなたはいつまで飼い殺されるつもりですか？</p>
+                    </div>
+                </div>
+
+                <div class="crime-breakdown">
+                    <h3>【会社が犯した罪状とリスクの実態】</h3>
+                    <div class="crime-item">
+                        <div class="crime-title">善管注意義務違反</div>
+                        <div class="crime-desc">特定の株主（由井氏）にのみ時価（5,751円）で利益を供与し、会社に3.4億円の損害を与えた罪。</div>
+                        <div class="crime-basis">根拠：345,060,000円の特定株主からの自己株式取得</div>
+                    </div>
+                    <div class="crime-item">
+                        <div class="crime-title">利益相反取引の疑い</div>
+                        <div class="crime-desc">監査役という立場を利用し、一般従業員（500円）とは比較にならない高値で売り抜けた不公平な取引。</div>
+                        <div class="crime-basis">根拠：買付単価5,751円 vs 従業員譲渡単価500円</div>
+                    </div>
+                    <div class="crime-item">
+                        <div class="crime-title">株主代表訴訟リスク</div>
+                        <div class="crime-desc">会社に損害を与えたとして、他の株主から取締役個人に対して損害賠償を請求される可能性。</div>
+                        <div class="crime-basis">根拠：会社資産の著しい流出（3.4億円）</div>
+                    </div>
+                    <div class="crime-item">
+                        <div class="crime-title">税務当局の強制捜査</div>
+                        <div class="crime-desc">従業員への「みなし給与」を隠蔽したとして、会社側にも重加算税や社会的信用の失墜が及ぶ。</div>
+                        <div class="crime-basis">根拠：1株あたり5,251円の経済的利益の発生</div>
+                    </div>
+                </div>
+
+                <div class="salvation">
+                    <a href="https://axelon.co.jp/" target="_blank" class="salvation-btn">「救済の入り口」へ：株式会社AxelOn</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
